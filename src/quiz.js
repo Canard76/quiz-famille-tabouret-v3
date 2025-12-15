@@ -1,8 +1,8 @@
 export const quiz = {
-  "titre": "Quiz soirée amusante – Parents & Ados",
-  "description": "40 questions QCM pour jouer en famille. Chaque question a 4 propositions et 1 bonne réponse.",
+  "titre": "Quiz soirée amusante – Parents & Ados (Nouveau + Jokers)",
+  "description": "40 nouvelles questions QCM avec jokers (50/50, +10s, Indice).",
   "langue": "fr",
-  "version": "2.0-js",
+  "version": "2.3-js",
   "timer": {
     "duration_seconds": 30,
     "warning_last_seconds": 10,
@@ -13,19 +13,40 @@ export const quiz = {
       "blink_on_warning": true
     }
   },
+  "jokers": {
+    "available": [
+      {
+        "id": "5050",
+        "label": "50/50",
+        "description": "Supprime 2 mauvaises réponses."
+      },
+      {
+        "id": "+10s",
+        "label": "+10s",
+        "description": "Ajoute 10 secondes au timer."
+      },
+      {
+        "id": "indice",
+        "label": "Indice",
+        "description": "Affiche un indice pour la question."
+      }
+    ],
+    "per_game_limit": 1
+  },
   "questions": [
     {
       "id": 1,
-      "categorie": "Culture pop",
-      "question": "Quel format de vidéo est le plus fréquent sur TikTok ?",
+      "categorie": "Vie quotidienne",
+      "question": "À quelle température l’eau bout au niveau de la mer ?",
       "options": [
-        "Vertical",
-        "Horizontal",
-        "Carré",
-        "Panoramique"
+        "100 °C",
+        "90 °C",
+        "80 °C",
+        "120 °C"
       ],
       "bonne_reponse": 0,
       "difficulte": "facile",
+      "indice": "Valeur ronde en degrés Celsius.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -34,16 +55,17 @@ export const quiz = {
     },
     {
       "id": 2,
-      "categorie": "Cuisine",
-      "question": "Quel ingrédient fait lever un gâteau ?",
+      "categorie": "Technologie",
+      "question": "Quel raccourci clavier sert à copier ?",
       "options": [
-        "Sucre",
-        "Levure chimique",
-        "Sel",
-        "Beurre"
+        "Ctrl+C",
+        "Ctrl+V",
+        "Ctrl+X",
+        "Ctrl+Z"
       ],
-      "bonne_reponse": 1,
+      "bonne_reponse": 0,
       "difficulte": "facile",
+      "indice": "On colle avec V, on copie avec…",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -52,16 +74,17 @@ export const quiz = {
     },
     {
       "id": 3,
-      "categorie": "Technologie",
-      "question": "Que signifie le ‘G’ dans 4G/5G ?",
+      "categorie": "Sport",
+      "question": "Combien de joueurs par équipe en volley-ball sur le terrain ?",
       "options": [
-        "Gigabyte",
-        "Génération",
-        "Global",
-        "Graphique"
+        "5",
+        "7",
+        "6",
+        "8"
       ],
-      "bonne_reponse": 1,
+      "bonne_reponse": 2,
       "difficulte": "facile",
+      "indice": "Deux rangées de trois joueurs.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -70,16 +93,17 @@ export const quiz = {
     },
     {
       "id": 4,
-      "categorie": "Cinéma",
-      "question": "Quel studio a créé l’univers des Avengers ?",
+      "categorie": "Musique",
+      "question": "Quel instrument possède généralement 88 touches ?",
       "options": [
-        "DC Studios",
-        "Paramount",
-        "Marvel Studios",
-        "Pixar"
+        "Piano",
+        "Guitare",
+        "Batterie",
+        "Saxophone"
       ],
-      "bonne_reponse": 2,
+      "bonne_reponse": 0,
       "difficulte": "facile",
+      "indice": "Instrument à clavier.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -88,16 +112,17 @@ export const quiz = {
     },
     {
       "id": 5,
-      "categorie": "Musique",
-      "question": "Quel instrument compte généralement 6 cordes ?",
+      "categorie": "Géographie",
+      "question": "Quel est le plus long fleuve de France ?",
       "options": [
-        "Guitare",
-        "Ukulélé",
-        "Basse",
-        "Violon"
+        "La Seine",
+        "La Loire",
+        "La Garonne",
+        "Le Rhône"
       ],
-      "bonne_reponse": 0,
-      "difficulte": "facile",
+      "bonne_reponse": 1,
+      "difficulte": "moyen",
+      "indice": "Il traverse Orléans et Nantes.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -106,16 +131,17 @@ export const quiz = {
     },
     {
       "id": 6,
-      "categorie": "Sport",
-      "question": "Dans quel sport marque-t-on des paniers ?",
+      "categorie": "Histoire",
+      "question": "En quelle année a eu lieu le débarquement en Normandie ?",
       "options": [
-        "Handball",
-        "Basketball",
-        "Football",
-        "Rugby"
+        "1939",
+        "1942",
+        "1944",
+        "1945"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "facile",
+      "bonne_reponse": 2,
+      "difficulte": "moyen",
+      "indice": "Pendant la Seconde Guerre mondiale, en juin.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -124,16 +150,17 @@ export const quiz = {
     },
     {
       "id": 7,
-      "categorie": "Jeux vidéo",
-      "question": "Dans Minecraft, que fabrique-t-on avec 2 bâtons et 3 planches ?",
+      "categorie": "Cinéma",
+      "question": "Qui a réalisé le film ‘Titanic’ ?",
       "options": [
-        "Épée",
-        "Pioche",
-        "Pelle",
-        "Hache"
+        "James Cameron",
+        "Steven Spielberg",
+        "Christopher Nolan",
+        "Ridley Scott"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "moyen",
+      "bonne_reponse": 0,
+      "difficulte": "facile",
+      "indice": "Il a aussi réalisé Avatar.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -142,16 +169,17 @@ export const quiz = {
     },
     {
       "id": 8,
-      "categorie": "Animaux",
-      "question": "Quel animal est le plus grand sur Terre ?",
+      "categorie": "Culture pop",
+      "question": "Quel Pokémon est la mascotte la plus connue ?",
       "options": [
-        "Éléphant d’Afrique",
-        "Baleine bleue",
-        "Girafe",
-        "Orque"
+        "Pikachu",
+        "Bulbizarre",
+        "Évoli",
+        "Salamèche"
       ],
-      "bonne_reponse": 1,
+      "bonne_reponse": 0,
       "difficulte": "facile",
+      "indice": "Petit Pokémon jaune électrique.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -161,15 +189,16 @@ export const quiz = {
     {
       "id": 9,
       "categorie": "Sciences",
-      "question": "De quoi sont principalement composées les étoiles ?",
+      "question": "Quelle planète est surnommée la ‘planète rouge’ ?",
       "options": [
-        "Fer",
-        "Hydrogène et hélium",
-        "Oxygène",
-        "Carbone"
+        "Mars",
+        "Vénus",
+        "Jupiter",
+        "Mercure"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "moyen",
+      "bonne_reponse": 0,
+      "difficulte": "facile",
+      "indice": "Couleur due à l’oxyde de fer.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -178,16 +207,17 @@ export const quiz = {
     },
     {
       "id": 10,
-      "categorie": "Langue",
-      "question": "Quel mot est un synonyme de ‘cool’ en argot ?",
+      "categorie": "Cuisine",
+      "question": "Quelle pâte utilise-t-on pour un mille-feuille ?",
       "options": [
-        "Stylé",
-        "Poli",
-        "Vieux",
-        "Lent"
+        "Feuilletée",
+        "Brisée",
+        "Sablée",
+        "Filo"
       ],
       "bonne_reponse": 0,
       "difficulte": "facile",
+      "indice": "Pâte en couches croustillantes.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -196,16 +226,17 @@ export const quiz = {
     },
     {
       "id": 11,
-      "categorie": "Histoire",
-      "question": "Quelle révolution a débuté en 1789 en France ?",
+      "categorie": "Environnement",
+      "question": "Quel gaz contribue le plus au réchauffement climatique ?",
       "options": [
-        "Industrielle",
-        "Scientifique",
-        "Française",
-        "Numérique"
+        "Ozone",
+        "Dioxyde de carbone",
+        "Azote",
+        "Hydrogène"
       ],
-      "bonne_reponse": 2,
+      "bonne_reponse": 1,
       "difficulte": "moyen",
+      "indice": "CO₂.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -214,16 +245,17 @@ export const quiz = {
     },
     {
       "id": 12,
-      "categorie": "Internet",
-      "question": "Que signifie ‘URL’ ?",
+      "categorie": "Langue",
+      "question": "Quel est le pluriel de ‘hibou’ ?",
       "options": [
-        "Universal Resource Link",
-        "Uniform Resource Locator",
-        "Unique Routing Level",
-        "Unified Remote Login"
+        "Hibous",
+        "Hiboux",
+        "Hibouxs",
+        "Hibousx"
       ],
       "bonne_reponse": 1,
-      "difficulte": "moyen",
+      "difficulte": "facile",
+      "indice": "Comme ‘bijou’, ‘caillou’…",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -232,16 +264,17 @@ export const quiz = {
     },
     {
       "id": 13,
-      "categorie": "Vie quotidienne",
-      "question": "Quel appareil mesure la température corporelle ?",
+      "categorie": "Technologie",
+      "question": "À quoi sert principalement un QR code ?",
       "options": [
-        "Baromètre",
-        "Thermomètre",
-        "Hygromètre",
-        "Altimètre"
+        "Augmenter la batterie",
+        "Ouvrir rapidement un lien ou une info",
+        "Rendre une photo plus nette",
+        "Bloquer la pub"
       ],
       "bonne_reponse": 1,
       "difficulte": "facile",
+      "indice": "On scanne pour accéder à une URL.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -250,16 +283,17 @@ export const quiz = {
     },
     {
       "id": 14,
-      "categorie": "Culture pop",
-      "question": "Quel univers met en scène ‘Hogwarts’ ?",
+      "categorie": "Vie quotidienne",
+      "question": "Quel appareil compte vos pas dans la journée ?",
       "options": [
-        "Le Seigneur des Anneaux",
-        "Harry Potter",
-        "Star Wars",
-        "Narnia"
+        "Altimètre",
+        "Podomètre",
+        "Baromètre",
+        "Tachymètre"
       ],
       "bonne_reponse": 1,
       "difficulte": "facile",
+      "indice": "Souvent intégré au smartphone ou montre.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -268,16 +302,17 @@ export const quiz = {
     },
     {
       "id": 15,
-      "categorie": "Géographie",
-      "question": "Quelle est la capitale de l’Espagne ?",
+      "categorie": "Culture générale",
+      "question": "Combien de côtés a un hexagone ?",
       "options": [
-        "Madrid",
-        "Barcelone",
-        "Séville",
-        "Valence"
+        "5",
+        "6",
+        "7",
+        "8"
       ],
-      "bonne_reponse": 0,
+      "bonne_reponse": 1,
       "difficulte": "facile",
+      "indice": "‘Hexa’…",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -286,16 +321,17 @@ export const quiz = {
     },
     {
       "id": 16,
-      "categorie": "Cinéma",
-      "question": "Qui réalise souvent des films d’animation chez Pixar ?",
+      "categorie": "Jeux vidéo",
+      "question": "Dans Mario, quel power-up rend le personnage géant ?",
       "options": [
-        "Hayao Miyazaki",
-        "Brad Bird",
-        "Christopher Nolan",
-        "James Cameron"
+        "Fleur de feu",
+        "Étoile",
+        "Champignon",
+        "Feuille"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "moyen",
+      "bonne_reponse": 2,
+      "difficulte": "facile",
+      "indice": "Objet rouge et blanc.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -304,16 +340,17 @@ export const quiz = {
     },
     {
       "id": 17,
-      "categorie": "Santé",
-      "question": "Quelle vitamine est principalement obtenue par l’exposition au soleil ?",
+      "categorie": "Sciences",
+      "question": "Que mange un herbivore ?",
       "options": [
-        "Vitamine A",
-        "Vitamine B12",
-        "Vitamine C",
-        "Vitamine D"
+        "Viande",
+        "Poisson",
+        "Plantes",
+        "Tout"
       ],
-      "bonne_reponse": 3,
+      "bonne_reponse": 2,
       "difficulte": "facile",
+      "indice": "Herbe, feuilles…",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -322,16 +359,17 @@ export const quiz = {
     },
     {
       "id": 18,
-      "categorie": "Musique",
-      "question": "Quel terme décrit une chanson qui reste en tête ?",
+      "categorie": "Géographie",
+      "question": "Quelle est la capitale du Canada ?",
       "options": [
-        "Banger",
-        "Ballade",
-        "Interlude",
-        "Instrumental"
+        "Toronto",
+        "Montréal",
+        "Ottawa",
+        "Vancouver"
       ],
-      "bonne_reponse": 0,
-      "difficulte": "facile",
+      "bonne_reponse": 2,
+      "difficulte": "moyen",
+      "indice": "Ville fédérale en Ontario.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -340,16 +378,17 @@ export const quiz = {
     },
     {
       "id": 19,
-      "categorie": "Emoji",
-      "question": "Lequel de ces intitulés correspond à l'emoji 'larmes de joie' ?",
+      "categorie": "Musique",
+      "question": "En 4/4, une noire vaut combien de temps ?",
       "options": [
-        "Rire aux larmes",
-        "Triste",
-        "En colère",
-        "Amoureux"
+        "1 temps",
+        "2 temps",
+        "0,5 temps",
+        "4 temps"
       ],
       "bonne_reponse": 0,
-      "difficulte": "facile",
+      "difficulte": "moyen",
+      "indice": "La croche vaut 0,5.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -358,16 +397,17 @@ export const quiz = {
     },
     {
       "id": 20,
-      "categorie": "Sciences",
-      "question": "Quelle planète est connue pour ses anneaux visibles ?",
+      "categorie": "Cinéma",
+      "question": "Quel héros manie le marteau Mjölnir ?",
       "options": [
-        "Mars",
-        "Jupiter",
-        "Saturne",
-        "Neptune"
+        "Loki",
+        "Thor",
+        "Odin",
+        "Hulk"
       ],
-      "bonne_reponse": 2,
+      "bonne_reponse": 1,
       "difficulte": "facile",
+      "indice": "Dieu nordique des tonnerres.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -376,16 +416,17 @@ export const quiz = {
     },
     {
       "id": 21,
-      "categorie": "Vie quotidienne",
-      "question": "Quel objet utilise-t-on pour charger un smartphone ?",
+      "categorie": "Sport",
+      "question": "Quel trophée reçoit le vainqueur de Roland-Garros (simple messieurs) ?",
       "options": [
-        "Câble USB",
-        "Écouteurs",
-        "Coque",
-        "Carte SIM"
+        "Coupe Davis",
+        "Coupe des Mousquetaires",
+        "Coupe du Monde",
+        "Ballon d’Or"
       ],
-      "bonne_reponse": 0,
-      "difficulte": "facile",
+      "bonne_reponse": 1,
+      "difficulte": "moyen",
+      "indice": "Nom en hommage aux célèbres joueurs français.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -394,16 +435,17 @@ export const quiz = {
     },
     {
       "id": 22,
-      "categorie": "Cuisine",
-      "question": "Quel plat est typiquement italien ?",
+      "categorie": "Énigmes",
+      "question": "Si tu en as un, tu veux le partager. Si tu le partages, tu ne l’as plus. Qu’est-ce ?",
       "options": [
-        "Sushi",
-        "Pizza",
-        "Tacos",
-        "Couscous"
+        "Argent",
+        "Secret",
+        "Temps",
+        "Nourriture"
       ],
       "bonne_reponse": 1,
-      "difficulte": "facile",
+      "difficulte": "moyen",
+      "indice": "Chut…",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -412,16 +454,17 @@ export const quiz = {
     },
     {
       "id": 23,
-      "categorie": "Jeux vidéo",
-      "question": "Dans Mario Kart, quelle fonction a la carapace rouge ?",
+      "categorie": "Sciences",
+      "question": "Où se trouvent les électrons dans un atome ?",
       "options": [
-        "Protection",
-        "Vitesse",
-        "Viser le coureur devant",
-        "Invisible"
+        "Au centre",
+        "Autour du noyau",
+        "Dans le noyau",
+        "Dans les protons"
       ],
-      "bonne_reponse": 2,
+      "bonne_reponse": 1,
       "difficulte": "moyen",
+      "indice": "Ils gravitent sur des couches.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -431,15 +474,16 @@ export const quiz = {
     {
       "id": 24,
       "categorie": "Technologie",
-      "question": "Quel terme décrit un mot de passe unique envoyé par SMS ?",
+      "question": "Quelle extension correspond à une image compressée courante ?",
       "options": [
-        "Captcha",
-        "2FA / OTP",
-        "Cookie",
-        "VPN"
+        ".docx",
+        ".mp3",
+        ".jpg",
+        ".pptx"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "moyen",
+      "bonne_reponse": 2,
+      "difficulte": "facile",
+      "indice": "Format photo très répandu.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -448,16 +492,17 @@ export const quiz = {
     },
     {
       "id": 25,
-      "categorie": "Culture générale",
-      "question": "Combien de continents compte-t-on généralement ?",
+      "categorie": "Vie quotidienne",
+      "question": "Sur un feu tricolore, quelle couleur signifie ‘stop’ ?",
       "options": [
-        "5",
-        "6",
-        "7",
-        "8"
+        "Vert",
+        "Orange",
+        "Rouge",
+        "Bleu"
       ],
       "bonne_reponse": 2,
-      "difficulte": "moyen",
+      "difficulte": "facile",
+      "indice": "La plus chaude des trois…",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -466,16 +511,17 @@ export const quiz = {
     },
     {
       "id": 26,
-      "categorie": "Langue",
-      "question": "Quel est le pluriel de ‘cheval’ ?",
+      "categorie": "Histoire",
+      "question": "Qui était Jeanne d’Arc ?",
       "options": [
-        "Chevals",
-        "Chevaux",
-        "Chevaus",
-        "Chevauxx"
+        "Une reine d’Angleterre",
+        "Une scientifique du XVIIIe siècle",
+        "Une héroïne française de la guerre de Cent Ans",
+        "Une impératrice romaine"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "facile",
+      "bonne_reponse": 2,
+      "difficulte": "moyen",
+      "indice": "Originaire de Lorraine.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -484,16 +530,17 @@ export const quiz = {
     },
     {
       "id": 27,
-      "categorie": "Géographie",
-      "question": "Quel océan borde la côte ouest de la France ?",
+      "categorie": "Culture pop",
+      "question": "Quelle série met en scène Sabrina, une jeune sorcière ?",
       "options": [
-        "Atlantique",
-        "Pacifique",
-        "Indien",
-        "Arctique"
+        "Les Nouvelles Aventures de Sabrina",
+        "Buffy contre les vampires",
+        "Wednesday",
+        "Charmed"
       ],
       "bonne_reponse": 0,
-      "difficulte": "facile",
+      "difficulte": "moyen",
+      "indice": "Sur Netflix, ambiance sombre.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -502,16 +549,17 @@ export const quiz = {
     },
     {
       "id": 28,
-      "categorie": "Sport",
-      "question": "Quelle couleur est associée aux cartons d’avertissement au football ?",
+      "categorie": "Musique",
+      "question": "Quelle lettre indique un volume faible en notation musicale ?",
       "options": [
-        "Bleu",
-        "Jaune et rouge",
-        "Vert",
-        "Noir"
+        "f",
+        "mf",
+        "p",
+        "ff"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "facile",
+      "bonne_reponse": 2,
+      "difficulte": "moyen",
+      "indice": "Initiale de ‘piano’.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -520,16 +568,17 @@ export const quiz = {
     },
     {
       "id": 29,
-      "categorie": "Cinéma",
-      "question": "Dans Star Wars, qui est le père de Luke ?",
+      "categorie": "Cuisine",
+      "question": "Quel est l’ingrédient principal du guacamole ?",
       "options": [
-        "Yoda",
-        "Obi-Wan",
-        "Anakin / Dark Vador",
-        "Han Solo"
+        "Tomate",
+        "Avocat",
+        "Poivron",
+        "Concombre"
       ],
-      "bonne_reponse": 2,
+      "bonne_reponse": 1,
       "difficulte": "facile",
+      "indice": "Fruit vert et crémeux.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -538,16 +587,17 @@ export const quiz = {
     },
     {
       "id": 30,
-      "categorie": "Vie quotidienne",
-      "question": "Quelle appli sert principalement à discuter en groupes et familles ?",
+      "categorie": "Géographie",
+      "question": "Quel pays a un drapeau rouge avec une croix blanche centrée ?",
       "options": [
-        "WhatsApp",
-        "Maps",
-        "Spotify",
-        "Photos"
+        "Danemark",
+        "Suisse",
+        "Autriche",
+        "Angleterre"
       ],
-      "bonne_reponse": 0,
-      "difficulte": "facile",
+      "bonne_reponse": 1,
+      "difficulte": "moyen",
+      "indice": "Pays alpin.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -556,16 +606,17 @@ export const quiz = {
     },
     {
       "id": 31,
-      "categorie": "Sciences",
-      "question": "Quel gaz respirons-nous le plus dans l’air ?",
+      "categorie": "Sport",
+      "question": "Au football, qui peut toucher le ballon avec les mains ?",
       "options": [
-        "Oxygène",
-        "Hydrogène",
-        "Azote",
-        "Dioxyde de carbone"
+        "Tout joueur",
+        "Personne",
+        "Seul le gardien dans sa surface",
+        "Seuls les défenseurs"
       ],
       "bonne_reponse": 2,
-      "difficulte": "moyen",
+      "difficulte": "facile",
+      "indice": "Règle de base du jeu.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -574,16 +625,17 @@ export const quiz = {
     },
     {
       "id": 32,
-      "categorie": "Culture pop",
-      "question": "Quelle série met en scène des Demogorgons ?",
+      "categorie": "Sciences",
+      "question": "Un kilogramme correspond à combien de grammes ?",
       "options": [
-        "Stranger Things",
-        "The Witcher",
-        "The Mandalorian",
-        "Wednesday"
+        "100 g",
+        "1000 g",
+        "10 000 g",
+        "500 g"
       ],
-      "bonne_reponse": 0,
-      "difficulte": "moyen",
+      "bonne_reponse": 1,
+      "difficulte": "facile",
+      "indice": "Un ordre de grandeur mille.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -592,16 +644,17 @@ export const quiz = {
     },
     {
       "id": 33,
-      "categorie": "Musique",
-      "question": "Quel service est principalement utilisé pour écouter des chansons ?",
+      "categorie": "Technologie",
+      "question": "Quel mode réduit la lumière bleue le soir sur un smartphone ?",
       "options": [
-        "Spotify",
-        "Netflix",
-        "YouTube Kids",
-        "Twitch"
+        "Mode avion",
+        "Mode nuit / Confort",
+        "Mode silencieux",
+        "Mode développeur"
       ],
-      "bonne_reponse": 0,
+      "bonne_reponse": 1,
       "difficulte": "facile",
+      "indice": "Active un ton plus chaud.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -610,16 +663,17 @@ export const quiz = {
     },
     {
       "id": 34,
-      "categorie": "Technologie",
-      "question": "Que signifie ‘AI’ en anglais ?",
+      "categorie": "Culture générale",
+      "question": "Combien de lettres compte l’alphabet français ?",
       "options": [
-        "Artificial Intelligence",
-        "Active Internet",
-        "Advanced Input",
-        "Audio Interface"
+        "24",
+        "25",
+        "26",
+        "27"
       ],
-      "bonne_reponse": 0,
+      "bonne_reponse": 2,
       "difficulte": "facile",
+      "indice": "Comme l’anglais.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -628,16 +682,17 @@ export const quiz = {
     },
     {
       "id": 35,
-      "categorie": "Jeux & société",
-      "question": "Dans Uno, quelle couleur n’existe pas ?",
+      "categorie": "Cinéma",
+      "question": "Dans ‘Matrix’, que prend Néo pour connaître la vérité ?",
       "options": [
-        "Rouge",
-        "Bleu",
-        "Violet",
-        "Vert"
+        "La pilule bleue",
+        "La pilule rouge",
+        "La pilule verte",
+        "La pilule noire"
       ],
-      "bonne_reponse": 2,
+      "bonne_reponse": 1,
       "difficulte": "facile",
+      "indice": "Choix décisif proposé par Morpheus.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -646,16 +701,17 @@ export const quiz = {
     },
     {
       "id": 36,
-      "categorie": "Vie quotidienne",
-      "question": "Quelle boisson est généralement sans caféine ?",
+      "categorie": "Musique",
+      "question": "Quel groupe a interprété ‘Bohemian Rhapsody’ ?",
       "options": [
-        "Thé noir",
-        "Café décaféiné",
-        "Eau",
-        "Cola"
+        "Queen",
+        "The Beatles",
+        "U2",
+        "Coldplay"
       ],
-      "bonne_reponse": 2,
+      "bonne_reponse": 0,
       "difficulte": "facile",
+      "indice": "Freddie Mercury au chant.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -664,16 +720,17 @@ export const quiz = {
     },
     {
       "id": 37,
-      "categorie": "Géographie",
-      "question": "Quel pays a pour capitale Berlin ?",
+      "categorie": "Environnement",
+      "question": "Quelle action réduit les plastiques à usage unique ?",
       "options": [
-        "Autriche",
-        "Suisse",
-        "Allemagne",
-        "Pays-Bas"
+        "Utiliser des gobelets jetables",
+        "Acheter plus de bouteilles",
+        "Utiliser une gourde réutilisable",
+        "Imprimer plus de papiers"
       ],
       "bonne_reponse": 2,
       "difficulte": "facile",
+      "indice": "Solution durable pour s’hydrater.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -682,16 +739,17 @@ export const quiz = {
     },
     {
       "id": 38,
-      "categorie": "Sport",
-      "question": "Quel joueur utilise une raquette ?",
+      "categorie": "Vie quotidienne",
+      "question": "Quelle date est associée à la galette des rois en France ?",
       "options": [
-        "Footballeur",
-        "Tennisman",
-        "Rugbyman",
-        "Handballeur"
+        "25 décembre",
+        "31 décembre",
+        "6 janvier",
+        "14 juillet"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "facile",
+      "bonne_reponse": 2,
+      "difficulte": "moyen",
+      "indice": "Épiphanie.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -700,16 +758,17 @@ export const quiz = {
     },
     {
       "id": 39,
-      "categorie": "Sciences",
-      "question": "Quel organe pompe le sang dans le corps ?",
+      "categorie": "Culture pop",
+      "question": "Quel super-héros protège Gotham City ?",
       "options": [
-        "Foie",
-        "Poumons",
-        "Cœur",
-        "Estomac"
+        "Superman",
+        "Spider-Man",
+        "Batman",
+        "Iron Man"
       ],
       "bonne_reponse": 2,
       "difficulte": "facile",
+      "indice": "Chevalier noir.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,
@@ -718,16 +777,17 @@ export const quiz = {
     },
     {
       "id": 40,
-      "categorie": "Culture générale",
-      "question": "Quel jour suit directement le vendredi ?",
+      "categorie": "Jeux & société",
+      "question": "Quel objet n’est pas une arme dans ‘Cluedo’ ?",
       "options": [
-        "Jeudi",
-        "Samedi",
-        "Dimanche",
-        "Lundi"
+        "Poignard",
+        "Bougeoir",
+        "Chaise",
+        "Revolver"
       ],
-      "bonne_reponse": 1,
-      "difficulte": "facile",
+      "bonne_reponse": 2,
+      "difficulte": "moyen",
+      "indice": "Objet de mobilier.",
       "timer": {
         "duration_seconds": 30,
         "warning_last_seconds": 10,

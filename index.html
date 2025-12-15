@@ -4,38 +4,51 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiz soirée – Parents & Ados (JS)</title>
+  <title>Quiz soirée – Parents & Ados (Halloween + Jokers)</title>
   <style>
-    :root { --accent: #1f7aec; --warn: #e53935; --ok: #1b5e20; --track: #e9eef8; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; margin: 0; background: #f7f7fb; color: #222; }
-    header { background: white; border-bottom: 1px solid #e6e6ef; padding: 16px 24px; position: sticky; top:0; }
-    h1 { font-size: 1.25rem; margin: 0; }
+    :root {
+      --accent: #FF6A00;     /* orange Halloween */
+      --accent2: #6A4C93;    /* violet */
+      --warn: #e53935;       /* rouge alerte */
+      --ok: #39FF14;         /* vert acide */
+      --track: #2a2a2a;      /* sombre */
+      --bg: #121212;         /* fond */
+      --card: #1d1d1d;       /* cartes */
+      --text: #eaeaea;       /* texte */
+      --muted: #9aa0a6;      /* texte secondaire */
+    }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; margin: 0; background: radial-gradient(1200px 600px at 10% -10%, #1b1b1b, var(--bg)); color: var(--text); }
+    header { background: #0f0f0f; border-bottom: 1px solid #222; padding: 16px 24px; position: sticky; top:0; }
+    h1 { font-size: 1.25rem; margin: 0; color: var(--accent); }
     main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
-    .card { background: white; border: 1px solid #e6e6ef; border-radius: 12px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-    .meta { color: #555; font-size: .9rem; margin-bottom: 8px; }
+    .card { background: var(--card); border: 1px solid #2c2c2c; border-radius: 12px; padding: 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.35); }
+    .meta { color: var(--muted); font-size: .9rem; margin-bottom: 8px; }
     .question { font-weight: 700; margin: 8px 0 12px; }
     .options { display: grid; grid-template-columns: 1fr; gap: 8px; }
-    .options button { text-align: left; border: 1px solid #dadcec; border-radius: 10px; padding: 12px; background: #fafbff; cursor: pointer; }
+    .options button { text-align: left; border: 1px solid #3a3a3a; border-radius: 10px; padding: 12px; background: #111; color: var(--text); cursor: pointer; }
     .options button:hover { border-color: var(--accent); }
-    .options button.correct { border-color: var(--ok); background: #e9f7ec; }
-    .options button.wrong { border-color: var(--warn); background: #fdeaea; }
+    .options button.correct { border-color: var(--ok); background: #0c1e0c; }
+    .options button.wrong { border-color: var(--warn); background: #2a0d0d; }
+    .options button.eliminated { opacity: .4; text-decoration: line-through; }
+
     .controls { display:flex; gap:8px; margin-top: 12px; }
-    .controls button { border: none; background: var(--accent); color: white; padding: 10px 14px; border-radius: 10px; cursor: pointer; }
-    .controls button.secondary { background: #eceff7; color: #0b1b38; }
-    .timer { font-weight: 700; font-size: 1.2rem; padding: 6px 10px; border-radius: 8px; display:inline-block; background: #eef6ff; color: #0b1b38; }
-    .timer.warn { background: #ffe9e9; color: var(--warn); animation: blink .9s linear infinite; }
+    .controls button { border: none; background: var(--accent); color: #101010; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 700; }
+    .controls button.secondary { background: #303030; color: var(--text); }
+
+    .timer { font-weight: 700; font-size: 1.2rem; padding: 6px 10px; border-radius: 8px; display:inline-block; background: #181818; color: var(--text); }
+    .timer.warn { background: #2a0d0d; color: var(--warn); animation: blink .9s linear infinite; }
     @keyframes blink { 50% { opacity: .35; } }
     .score { font-weight: 700; }
-    footer { color: #666; text-align:center; padding: 24px; }
+    footer { color: var(--muted); text-align:center; padding: 24px; }
 
     /* Question progress bar */
     .progress { margin: 8px 0 12px; background: var(--track); border-radius: 999px; overflow: hidden; height: 10px; position: relative; }
-    .progress__bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), #66b2ff); transition: width .35s ease; }
-    .progress__label { font-size: .85rem; color: #3a4260; margin-top: 6px; }
+    .progress__bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .35s ease; }
+    .progress__label { font-size: .85rem; color: var(--muted); margin-top: 6px; }
 
     /* Timer progress bar */
     .timerbar { margin: 8px 0 12px; background: var(--track); border-radius: 6px; overflow: hidden; height: 8px; position: relative; }
-    .timerbar__fill { height: 100%; width: 100%; background: linear-gradient(90deg, var(--accent), #66b2ff); transition: width .3s linear; }
+    .timerbar__fill { height: 100%; width: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .3s linear; }
 
     /* Confetti */
     .confetti-container { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 9999; }
@@ -45,17 +58,23 @@
     @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 1; } }
     @keyframes spin { 50% { transform: translateY(50vh) rotate(180deg); } }
 
-    /* Star pop */
-    .star-pop { position: fixed; transform: translate(-50%, 0); font-size: 28px; filter: drop-shadow(0 2px 2px rgba(0,0,0,.2));
+    /* Star / pumpkin pop */
+    .star-pop { position: fixed; transform: translate(-50%, 0); font-size: 28px; filter: drop-shadow(0 2px 2px rgba(0,0,0,.4));
                 animation: starRise 1.2s ease-out forwards; pointer-events: none; z-index: 9999; }
     @keyframes starRise { 0% { opacity: 0; transform: translate(-50%, 0) scale(.6); }
                           20% { opacity: 1; }
                           100%{ opacity: 0; transform: translate(-50%, -120px) scale(1.2); } }
+
+    /* Jokers */
+    .jokers { display:flex; gap:8px; margin: 12px 0; }
+    .jokers button { border: 1px solid #3a3a3a; background: #111; color: var(--text); padding: 8px 12px; border-radius: 8px; cursor:pointer; }
+    .jokers button:disabled { opacity: .5; cursor: not-allowed; }
+    .hint { color: var(--muted); font-style: italic; margin-top: 6px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Quiz soirée – Parents & Ados</h1>
+    <h1>🎃 Quiz soirée – Parents & Ados (Halloween)</h1>
     <div id="info" class="meta"></div>
   </header>
   <main>
@@ -72,6 +91,15 @@
       <div id="timer" class="timer">--</div>
       <div id="question" class="question"></div>
       <div id="options" class="options"></div>
+
+      <!-- Jokers -->
+      <div class="jokers">
+        <button id="joker-5050">🧩 Joker 50/50</button>
+        <button id="joker-+10s">⏱️ Joker +10s</button>
+        <button id="joker-indice">💡 Joker Indice</button>
+      </div>
+      <div id="hint" class="hint"></div>
+
       <div class="controls">
         <button id="nextBtn">Question suivante</button>
         <button id="resetBtn" class="secondary">Réinitialiser</button>
@@ -79,7 +107,7 @@
       <p class="meta"><span class="score" id="score">Score: 0</span></p>
     </div>
   </main>
-  <footer>Thème Noël 🎄 — Confettis rouge/vert/or + étoile ⭐ à chaque bonne réponse</footer>
+  <footer>Thème Halloween — confettis orange/violet/noir + citrouille 🎃 à la bonne réponse — Jokers utilisables 1 fois par partie</footer>
 
   <script type="module">
     import { init } from './src/app.js';
