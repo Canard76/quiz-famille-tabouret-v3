@@ -2,7 +2,30 @@
 import quiz from './quiz.js';
 
 let i = 0, score = 0, timerId = null, t = 0;
+let starCount = 0; // cumulative stars
 const jokersUsed = { '5050': false, '+10s': false, 'indice': false };
+let jokersTotalUsed = 0;
+const JOKERS_LIMIT = (quiz.jokers && quiz.jokers.per_game_total_limit) ? quiz.jokers.per_game_total_limit : 2;
+let currentTheme = 'halloween';
+
+function setTheme(theme) {
+  currentTheme = theme;
+  const body = document.body;
+  body.classList.remove('theme-halloween','theme-noel');
+  body.classList.add(theme === 'noel' ? 'theme-noel' : 'theme-halloween');
+}
+
+function initThemeToggle() {
+  const sel = document.getElementById('themeSelect');
+  if (!sel) return;
+  sel.value = currentTheme;
+  sel.addEventListener('change', (e) => setTheme(e.target.value));
+}
+
+function updateStars() {
+  const el = document.getElementById('stars');
+  if (el) el.textContent = `Étoiles: ${starCount}`;
+}
 
 function updateProgress() {
   const total = quiz.questions.length;
@@ -19,7 +42,7 @@ function updateTimerBar(duration, remaining, warnAt, warnColor) {
   if (!fill) return;
   const pct = Math.max(0, Math.min(100, Math.round((remaining / duration) * 100)));
   fill.style.width = pct + '%';
-  // baseline color
+  // baseline color (uses CSS variables for theme)
   fill.style.background = 'linear-gradient(90deg, var(--accent), var(--accent2))';
   if (remaining <= warnAt) {
     fill.style.background = `linear-gradient(90deg, ${warnColor}, #ff9f9f)`;
@@ -68,17 +91,33 @@ function showQuestion() {
     optionsDiv.appendChild(btn);
   });
 
-  // reset jokers buttons enabled state (if unused globally)
-  for (const id of Object.keys(jokersUsed)) {
-    const el = document.getElementById('joker-' + id);
-    if (el) el.disabled = jokersUsed[id];
-  }
+  // reset joker buttons enabled state (keep disabled if already used or limit reached)
+  refreshJokerButtons();
 
   updateProgress();
   startTimer(q.timer || quiz.timer);
 }
 
-// --- Confetti animation (Halloween palette) ---
+function refreshJokerButtons() {
+  const disabledAll = jokersTotalUsed >= JOKERS_LIMIT;
+  for (const id of Object.keys(jokersUsed)) {
+    const el = document.getElementById('joker-' + id);
+    if (!el) continue;
+    el.disabled = jokersUsed[id] || disabledAll;
+  }
+  const cap = document.getElementById('joker-cap');
+  if (cap) cap.textContent = `Jokers utilisés: ${jokersTotalUsed} / ${JOKERS_LIMIT}`;
+}
+
+// --- Confetti animation depending on theme ---
+function getThemeColors() {
+  if (currentTheme === 'noel') {
+    return ['#C62828','#2E7D32','#FFD54F','#FFFFFF','#B0BEC5','#8B0000','#006400'];
+  }
+  // halloween default
+  return ['#FF6A00','#6A4C93','#212121','#39FF14','#FFFFFF','#FF8C00','#9c27b0'];
+}
+
 function fireConfetti(durationMs = 1600, count = 140) {
   let container = document.getElementById('confetti');
   if (!container) {
@@ -87,8 +126,7 @@ function fireConfetti(durationMs = 1600, count = 140) {
     container.className = 'confetti-container';
     document.body.appendChild(container);
   }
-  // Halloween colors: orange, violet, noir, vert acide, blanc
-  const colors = ['#FF6A00','#6A4C93','#212121','#39FF14','#FFFFFF','#FF8C00','#9c27b0'];
+  const colors = getThemeColors();
   const shapes = ['square','circle','triangle'];
   for (let k = 0; k < count; k++) {
     const p = document.createElement('div');
@@ -111,12 +149,11 @@ function fireConfetti(durationMs = 1600, count = 140) {
   setTimeout(() => { if (container) container.innerHTML = ''; }, durationMs + 600);
 }
 
-// --- Star / pumpkin pop near the correct answer button ---
 function spawnStarAtElement(el) {
   const rect = el.getBoundingClientRect();
   const star = document.createElement('div');
   star.className = 'star-pop';
-  star.textContent = '🎃'; // pumpkin for Halloween
+  star.textContent = currentTheme === 'noel' ? '⭐' : '🎃';
   star.style.left = (rect.left + rect.width/2) + 'px';
   star.style.top = (rect.top) + 'px';
   document.body.appendChild(star);
@@ -131,6 +168,8 @@ function answer(choice, correctIdx, btn) {
   if (choice === correctIdx) {
     btn.classList.add('correct');
     score++;
+    starCount++;
+    updateStars();
     spawnStarAtElement(btn);
     fireConfetti();
   } else {
@@ -140,34 +179,49 @@ function answer(choice, correctIdx, btn) {
 }
 
 function next() { i = (i + 1) % quiz.questions.length; showQuestion(); }
-function reset() { i = 0; score = 0; document.getElementById('score').textContent = `Score: ${score}`; for (const k in jokersUsed) jokersUsed[k] = false; showQuestion(); }
+function reset() {
+  i = 0; score = 0; starCount = 0; jokersTotalUsed = 0; for (const k in jokersUsed) jokersUsed[k] = false;
+  document.getElementById('score').textContent = `Score: ${score}`;
+  updateStars(); refreshJokerButtons(); showQuestion();
+}
 
 // --- Jokers ---
+function consumeJokerAndCheckLimit(buttonId) {
+  if (jokersTotalUsed >= JOKERS_LIMIT) return false;
+  jokersTotalUsed++;
+  const btn = document.getElementById(buttonId);
+  if (btn) btn.disabled = true;
+  refreshJokerButtons();
+  return true;
+}
+
 function use5050() {
-  if (jokersUsed['5050']) return; jokersUsed['5050'] = true; document.getElementById('joker-5050').disabled = true;
+  if (jokersUsed['5050']) return; if (!consumeJokerAndCheckLimit('joker-5050')) return; jokersUsed['5050'] = true;
   const q = quiz.questions[i];
   const correct = q.bonne_reponse;
   const buttons = Array.from(document.querySelectorAll('#options button'));
-  // pick two wrong indices to hide
   const wrongIndices = buttons.map((_, idx) => idx).filter(idx => idx !== correct);
-  // random pick 2
-  for (let r of wrongIndices.slice(0,2)) { buttons[r].disabled = true; buttons[r].classList.add('eliminated'); }
+  // Randomly choose 2 wrongs
+  const shuffled = wrongIndices.sort(() => Math.random() - 0.5).slice(0,2);
+  for (let r of shuffled) { buttons[r].disabled = true; buttons[r].classList.add('eliminated'); }
 }
 
 function usePlus10s() {
-  if (jokersUsed['+10s']) return; jokersUsed['+10s'] = true; document.getElementById('joker-+10s').disabled = true;
+  if (jokersUsed['+10s']) return; if (!consumeJokerAndCheckLimit('joker-+10s')) return; jokersUsed['+10s'] = true;
   t = t + 10; const timerEl = document.getElementById('timer'); timerEl.textContent = t;
 }
 
 function useHint() {
-  if (jokersUsed['indice']) return; jokersUsed['indice'] = true; document.getElementById('joker-indice').disabled = true;
+  if (jokersUsed['indice']) return; if (!consumeJokerAndCheckLimit('joker-indice')) return; jokersUsed['indice'] = true;
   const q = quiz.questions[i];
   const hintEl = document.getElementById('hint');
-  hintEl.textContent = 'Indice: ' + (q.indice || 'Pas d'indice pour cette question.');
+  hintEl.textContent = 'Indice: ' + (q.indice || "Pas d'indice pour cette question.");
 }
 
 export function init() {
-  document.getElementById('info').textContent = `${quiz.titre} — ${quiz.description}`;
+  setTheme('halloween');
+  initThemeToggle();
+  updateStars();
   document.getElementById('nextBtn').addEventListener('click', next);
   document.getElementById('resetBtn').addEventListener('click', reset);
   // Joker buttons

@@ -1,8 +1,8 @@
 export const quiz = {
-  "titre": "Quiz soirée amusante – Parents & Ados (Nouveau + Jokers)",
-  "description": "40 nouvelles questions QCM avec jokers (50/50, +10s, Indice).",
+  "titre": "Quiz soirée amusante – Parents & Ados (Jokers & Thèmes)",
+  "description": "40 questions QCM avec jokers et bascule de thème (Halloween / Noël).",
   "langue": "fr",
-  "version": "2.3-js",
+  "version": "2.4-js",
   "timer": {
     "duration_seconds": 30,
     "warning_last_seconds": 10,
@@ -31,7 +31,7 @@ export const quiz = {
         "description": "Affiche un indice pour la question."
       }
     ],
-    "per_game_limit": 1
+    "per_game_total_limit": 2
   },
   "questions": [
     {
