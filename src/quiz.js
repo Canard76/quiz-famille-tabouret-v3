@@ -31,7 +31,7 @@ export const quiz = {
         "description": "Affiche un indice pour la question."
       }
     ],
-    "per_game_total_limit": 2
+    "per_game_total_limit": 5
   },
   "questions": [
     {
