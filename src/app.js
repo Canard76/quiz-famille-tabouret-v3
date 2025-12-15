@@ -6,7 +6,7 @@ let starCount = 0; // cumulative stars
 const jokersUsed = { '5050': false, '+10s': false, 'indice': false };
 let jokersTotalUsed = 0;
 const JOKERS_LIMIT = (quiz.jokers && quiz.jokers.per_game_total_limit) ? quiz.jokers.per_game_total_limit : 5;
-let currentTheme = 'halloween';
+let currentTheme = 'noel';
 
 function setTheme(theme) {
   currentTheme = theme;
